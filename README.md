@@ -1,2 +1,3 @@
 # dotfiles
-Dotfiles for command line stuff
+
+Dotfiles for command line stuff.

@@ -1,5 +1,5 @@
 export DEVELOPMENT=~/Development
-export SCRIPTS=$DEVELOPMENT/scripts
+export SCRIPTS=$DEVELOPMENT/dotfiles
 
 source $SCRIPTS/colors.sh
 source $SCRIPTS/git-completion.sh

@@ -4,6 +4,7 @@ export SCRIPTS=$DEVELOPMENT/dotfiles
 source $SCRIPTS/colors.sh
 source $SCRIPTS/git-completion.sh
 source $SCRIPTS/real-easy.sh
+source $SCRIPTS/npm-publish.sh
 
 export NPM_GLOBAL_PATH=$DEVELOPMENT/npm_global/bin
 export MONGODB_BIN_PATH=$DEVELOPMENT/mongodb/bin

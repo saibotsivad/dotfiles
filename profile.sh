@@ -27,6 +27,10 @@ alias nr=npm-run # run with npm scoped environment
 alias og=gh-home # open current folder in github if possible
 alias on=npm-home # open current folder in npm if possible
 
+# disable homebrew analytics because I am paranoid
+export HOMEBREW_NO_ANALYTICS=1
+
+# terminal colors
 export PS1="\n$C_LIGHTGREEN\u $C_LIGHTGRAY@ $C_LIGHTGREEN\h $C_LIGHTGRAY: $C_LIGHTYELLOW\w $C_LIGHTCYAN"'$(__git_ps1 " (%s)")'"\n$C_LIGHTGRAY\$ $C_DEFAULT "
 
 export NVM_DIR="~/.nvm"

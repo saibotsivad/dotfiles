@@ -1,15 +1,19 @@
 export DEVELOPMENT=~/Development
 export SCRIPTS=$DEVELOPMENT/dotfiles
+export LOCAL_BIN="/usr/local/bin"
 
 source $SCRIPTS/colors.sh
 source $SCRIPTS/git-completion.sh
 source $SCRIPTS/real-easy.sh
 source $SCRIPTS/npm-publish.sh
 
+# import the private bits
+source $SCRIPTS/private-profile-setup.sh
+
 export NPM_GLOBAL_PATH=$DEVELOPMENT/npm_global/bin
 export MONGODB_BIN_PATH=$DEVELOPMENT/mongodb/bin
 
-export PATH=$NPM_GLOBAL_PATH:$MONGODB_BIN_PATH:$PATH
+export PATH=$LOCAL_BIN:$NPM_GLOBAL_PATH:$MONGODB_BIN_PATH:$PATH
 
 # useful commands
 alias sublime="open -a 'Sublime Text.app'" # open a file in sublime text editor
@@ -18,6 +22,7 @@ alias reload="source ~/.profile" # reload this file
 alias dnsflush="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder; echo dns flushed" # flush dns cache
 
 # installed apps
+alias stree="open -a SourceTree ." # open SourceTree in current folder
 alias redis="~/Development/redis/src/redis-server"
 alias redis-cli="~/Development/redis/src/redis-cli"
 
@@ -33,5 +38,6 @@ export HOMEBREW_NO_ANALYTICS=1
 # terminal colors
 export PS1="\n$C_LIGHTGREEN\u $C_LIGHTGRAY@ $C_LIGHTGREEN\h $C_LIGHTGRAY: $C_LIGHTYELLOW\w $C_LIGHTCYAN"'$(__git_ps1 " (%s)")'"\n$C_LIGHTGRAY\$ $C_DEFAULT "
 
-export NVM_DIR="~/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# load node version manager
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"

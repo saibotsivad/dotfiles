@@ -6,10 +6,9 @@ source $SCRIPTS/git-completion.sh
 source $SCRIPTS/real-easy.sh
 
 export MONGODB_BIN_PATH=$DEVELOPMENT/mongodb/bin
-export GAME_SIMULATOR_PATH=$DEVELOPMENT/git/fanx-game-simulator
 export NGROK_BIN_PATH=$DEVELOPMENT/ngrok
 
-export PATH=$MONGODB_BIN_PATH:$GAME_SIMULATOR_PATH:$NGROK_BIN_PATH:$PATH
+export PATH=$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$PATH
 
 alias sublime="open -a 'Sublime Text.app'"
 alias showhidden="defaults write com.apple.finder AppleShowAllFiles YES; killall -KILL Finder"

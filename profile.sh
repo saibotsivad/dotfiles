@@ -7,7 +7,6 @@ export DOTFILES=$DEVELOPMENT/dotfiles
 # bring on the scripts
 source $DOTFILES/script/colors.sh
 source $DOTFILES/script/git-completion.sh
-source $DOTFILES/script/real-easy.sh
 source $DOTFILES/script/npm-publish.sh
 
 # import the private bits

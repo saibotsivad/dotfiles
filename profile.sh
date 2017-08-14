@@ -35,6 +35,7 @@ alias sublime="open -a 'Sublime Text.app'" # open a file in sublime text editor
 alias showhidden="defaults write com.apple.finder AppleShowAllFiles YES; killall -KILL Finder" # show hidden files
 alias reload="source ~/.profile" # reload this file
 alias dnsflush="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder; echo dns flushed" # flush dns cache
+alias gitclean="git remote prune" # clean removed branches, use like `gitclean origin` or `gitclean origin --dry-run` for a safer
 
 # disable homebrew analytics because I am paranoid
 export HOMEBREW_NO_ANALYTICS=1

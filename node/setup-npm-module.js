@@ -1,7 +1,7 @@
+const execSync = require('child_process').execSync
 const fs = require('fs')
 const glob = require('glob')
 const path = require('path')
-const sh = require('shell-tag')
 const waitForUserInput = require('wait-for-user-input')
 
 const files = glob
@@ -44,7 +44,7 @@ module.exports = async ({ cwd, argv }) => {
 	devDependencies
 		.forEach(dependency => {
 			console.log(`installing: ${dependency}`)
-			sh`npm install --save-dev ${dependency}`
+			execSync(`npm install --save-dev ${dependency}`)
 		})
 
 	// commit it as version 0

@@ -17,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/saibotsivad/{{REPO_NAME}}/issues"
   },
-  "homepage": "https://github.com/saibotsivad/{{REPO_NAME}}"
+  "homepage": "https://github.com/saibotsivad/{{REPO_NAME}}",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }

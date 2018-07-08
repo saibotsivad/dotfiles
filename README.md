@@ -13,3 +13,13 @@ In this folder you will want to run:
     ./setup-COMPUTER.sh
 
 Where `COMPUTER` is any of the computer names.
+
+## npm
+
+With npm@5+ you can use `npx`, so I also turned this into a handy dandy npm launcher thing.
+
+You can do something like:
+
+```sh
+npx saibotsivad/dotfiles $COMMAND --param=$PARAM
+```

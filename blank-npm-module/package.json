@@ -1,0 +1,21 @@
+{
+  "name": "{{REPO_NAME}}",
+  "version": "0.0.0",
+  "description": "{{DESCRIPTION}}",
+  "main": "index.js",
+  "scripts": {
+    "commit": "git-cz",
+    "test": "tape tests/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saibotsivad/{{REPO_NAME}}.git"
+  },
+  "keywords": [],
+  "author": "saibotsivad",
+  "license": "VOL",
+  "bugs": {
+    "url": "https://github.com/saibotsivad/{{REPO_NAME}}/issues"
+  },
+  "homepage": "https://github.com/saibotsivad/{{REPO_NAME}}#readme"
+}

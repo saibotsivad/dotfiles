@@ -25,7 +25,8 @@ module.exports = async ({ cwd, argv }) => {
 	// write files
 	const partsToReplace = {
 		'{{REPO_NAME}}': path.parse(cwd).base,
-		'{{DESCRIPTION}}': await waitForUserInput('Add a description (you can update later): ')
+		'{{DESCRIPTION}}': await waitForUserInput('Add a description (you can update later): '),
+		'{{KEYWORDS}}': JSON.stringify((await waitForUserInput('Type some keywords (space seperated): ')).split(/\s+/))
 	}
 	files
 		.forEach(({ content, filename }) => {

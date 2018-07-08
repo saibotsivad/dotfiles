@@ -11,11 +11,11 @@
     "type": "git",
     "url": "git+https://github.com/saibotsivad/{{REPO_NAME}}.git"
   },
-  "keywords": [],
-  "author": "saibotsivad",
+  "keywords": {{KEYWORDS}},
+  "author": "Tobias Davis (https://davistobias.com)",
   "license": "VOL",
   "bugs": {
     "url": "https://github.com/saibotsivad/{{REPO_NAME}}/issues"
   },
-  "homepage": "https://github.com/saibotsivad/{{REPO_NAME}}#readme"
+  "homepage": "https://github.com/saibotsivad/{{REPO_NAME}}"
 }

@@ -14,6 +14,11 @@ source $SCRIPTS/profile.sh
 
 # setup rbenv, a ruby environment manager
 # installation of `rbenv` is done with homebrew: `brew install rbenv`
+# install a version of ruby: rbenv install 2.5.3
+# after install need to do: rbenv rehash
+# then install: gem install bundler
+# inside a folder: bundle install
+# e.g. NOT `bundler` it's `bundle`
 eval "$(rbenv init -)"
 
 # setup anything custom

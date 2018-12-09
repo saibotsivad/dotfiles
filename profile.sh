@@ -16,8 +16,9 @@ source $DOTFILES/secrets.sh
 export LOCAL_BIN="/usr/local/bin"
 export MONGODB_BIN_PATH=$DEVELOPMENT/mongodb/bin
 export NGROK_BIN_PATH=$DEVELOPMENT/ngrok
+export RUBY_BIN_PATH=$HOME/.gem/ruby/2.3.0/bin
 
-export PATH=$LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$PATH
+export PATH=$LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PATH
 
 # installed apps
 alias redis=$DEVELOPMENT/redis/src/redis-server
@@ -47,3 +48,8 @@ export PS1="\n$C_LIGHTGREEN\u $C_LIGHTGRAY@ $C_LIGHTGREEN\h $C_LIGHTGRAY: $C_LIG
 # load node version manager
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# enable android debug tools if available
+if [ -d "$HOME/Development/adb-fastboot/platform-tools" ] ; then
+	export PATH="$HOME/Development/adb-fastboot/platform-tools:$PATH"
+fi

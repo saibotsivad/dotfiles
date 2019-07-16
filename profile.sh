@@ -43,7 +43,7 @@ alias gitclean="git remote prune" # clean removed branches, use like `gitclean o
 export HOMEBREW_NO_ANALYTICS=1
 
 # terminal colors
-export PS1="\n$C_LIGHTGREEN\u $C_LIGHTGRAY@ $C_LIGHTGREEN\h $C_LIGHTGRAY: $C_LIGHTYELLOW\w $C_LIGHTCYAN"'$(__git_ps1 " (%s)")'"\n$C_LIGHTGRAY\$ $C_DEFAULT "
+export PS1="\n\D{%Y-%m-%d %H:%M:%S} $C_LIGHTGREEN\u $C_LIGHTGRAY@ $C_LIGHTGREEN\h $C_LIGHTGRAY: $C_LIGHTYELLOW\w $C_LIGHTCYAN"'$(__git_ps1 " (%s)")'"\n$C_LIGHTGRAY\$ $C_DEFAULT "
 
 # load node version manager
 export NVM_DIR="$HOME/.nvm"

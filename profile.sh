@@ -3,11 +3,13 @@
 # where everything lives
 export DEVELOPMENT=$HOME/Development
 export DOTFILES=$DEVELOPMENT/dotfiles
+export INKDROP_BACKUP_FOLDER=$DEVELOPMENT/inkdrop-sync
 
 # bring on the scripts
 source $DOTFILES/script/colors.sh
 source $DOTFILES/script/git-completion.sh
 source $DOTFILES/script/npm-publish.sh
+source $DOTFILES/script/commit-inkdrop.sh
 
 # import the private bits
 source $DOTFILES/secrets.sh
@@ -43,7 +45,7 @@ alias gitclean="git remote prune" # clean removed branches, use like `gitclean o
 export HOMEBREW_NO_ANALYTICS=1
 
 # terminal colors
-export PS1="\n\D{%Y-%m-%d %H:%M:%S} $C_LIGHTGREEN\u $C_LIGHTGRAY@ $C_LIGHTGREEN\h $C_LIGHTGRAY: $C_LIGHTYELLOW\w $C_LIGHTCYAN"'$(__git_ps1 " (%s)")'"\n$C_LIGHTGRAY\$ $C_DEFAULT "
+export PS1="\n$C_LIGHTGRAY\D{%Y-%m-%d %H:%M:%S} $C_LIGHTGREEN\u $C_LIGHTGRAY@ $C_LIGHTGREEN\h $C_LIGHTGRAY: $C_LIGHTYELLOW\w $C_LIGHTCYAN"'$(__git_ps1 "(%s)")'"\n$C_LIGHTGRAY\$ $C_DEFAULT "
 
 # load node version manager
 export NVM_DIR="$HOME/.nvm"

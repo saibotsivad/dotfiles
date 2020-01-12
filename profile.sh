@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# disable the macOS bash->zsh warning
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # where everything lives
 export DEVELOPMENT=$HOME/Development
 export DOTFILES=$DEVELOPMENT/dotfiles
@@ -30,6 +33,7 @@ alias redis-cli=$DEVELOPMENT/redis/src/redis-cli
 alias qrcode=qrcode-terminal # create qrcode from given text
 alias ni="node $DOTFILES/cli.js setup-npm-module"
 alias nr=npm-run # run with npm scoped environment
+alias passphrase="generate-passphrase" # uses `generate-passphrase-cli`
 alias og=gh-home # open current folder in github if possible
 alias on=npm-home # open current folder in npm if possible
 alias stree="open -a SourceTree ." # open SourceTree in current folder

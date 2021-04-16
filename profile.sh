@@ -19,8 +19,9 @@ export LOCAL_BIN="/usr/local/bin"
 export MONGODB_BIN_PATH=$DEVELOPMENT/mongodb/bin
 export NGROK_BIN_PATH=$DEVELOPMENT/ngrok
 export RUBY_BIN_PATH=$HOME/.gem/ruby/2.3.0/bin
+export PERSONAL_PATH_BINS=$DOTFILES/path-bins
 
-export PATH=$LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PATH
+export PATH=$LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PERSONAL_PATH_BINS:$PATH
 
 # installed apps
 alias redis=$DEVELOPMENT/redis/src/redis-server
@@ -39,10 +40,17 @@ alias sublime="open -a 'Sublime Text.app'" # open a file in sublime text editor
 alias showhidden="defaults write com.apple.finder AppleShowAllFiles YES; killall -KILL Finder" # show hidden files
 alias reload="source ~/.profile" # reload this file
 alias dnsflush="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder; echo dns flushed" # flush dns cache
-alias gitclean="git remote prune" # clean removed branches, use like `gitclean origin` or `gitclean origin --dry-run` for a safer
+alias gitpruneorigin="git remote prune origin" # clean removed branches
+alias gitpruneupstream="git remote prune upstream" # clean removed branches
 
-# disable homebrew analytics because I am paranoid
+# disable homebrew analytics
 export HOMEBREW_NO_ANALYTICS=1
+
+# disable aws analytics
+export SAM_CLI_TELEMETRY=0
+
+# silence the mac warning
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # terminal colors
 export PS1="\n$C_LIGHTGRAY\D{%Y-%m-%d %H:%M:%S} $C_LIGHTGREEN\u $C_LIGHTGRAY@ $C_LIGHTGREEN\h $C_LIGHTGRAY: $C_LIGHTYELLOW\w $C_LIGHTCYAN"'$(__git_ps1 "(%s)")'"\n$C_LIGHTGRAY\$ $C_DEFAULT "

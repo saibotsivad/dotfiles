@@ -27,8 +27,8 @@ export PERSONAL_PATH_BINS=$DOTFILES/path-bins
 export PATH=$LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PERSONAL_PATH_BINS:$PATH
 
 # installed apps
-alias redis=$DEVELOPMENT/redis/src/redis-server
-alias redis-cli=$DEVELOPMENT/redis/src/redis-cli
+#alias redis=$DEVELOPMENT/redis/src/redis-server
+#alias redis-cli=$DEVELOPMENT/redis/src/redis-cli
 
 # app shortcuts
 alias qrcode=qrcode-terminal # create qrcode from given text

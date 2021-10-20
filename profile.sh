@@ -22,15 +22,17 @@ export LOCAL_BIN="/usr/local/bin"
 export MONGODB_BIN_PATH=$DEVELOPMENT/mongodb/bin
 export NGROK_BIN_PATH=$DEVELOPMENT/ngrok
 export RUBY_BIN_PATH=$HOME/.gem/ruby/2.3.0/bin
-export PERSONAL_PATH_BINS=$DOTFILES/path-bins
+export PERSONAL_PATH_BINS=$DOTFILES/bin
+export CUSTOM_BINS=$DEVELOPMENT/bins
 
-export PATH=$LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PERSONAL_PATH_BINS:$PATH
+export PATH=$LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PERSONAL_PATH_BINS:$CUSTOM_BINS:$PATH
 
 # installed apps
 #alias redis=$DEVELOPMENT/redis/src/redis-server
 #alias redis-cli=$DEVELOPMENT/redis/src/redis-cli
 
 # app shortcuts
+alias ll="exa -1 -l -F --color-scale --group-directories-first --time-style=long-iso --git --header --group" # https://github.com/ogham/exa
 alias qrcode=qrcode-terminal # create qrcode from given text
 alias ni="node $DOTFILES/cli.js setup-npm-module"
 alias nr=npm-run # run with npm scoped environment

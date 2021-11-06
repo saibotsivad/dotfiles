@@ -32,7 +32,7 @@ export PATH=$LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PERSONA
 #alias redis-cli=$DEVELOPMENT/redis/src/redis-cli
 
 # app shortcuts
-alias ll="exa -1 -l -F --all --icons --color-scale --group-directories-first --time-style=long-iso --git --header --group" # https://github.com/ogham/exa
+alias ll="exa -1 -l -F --all --color-scale --group-directories-first --time-style=long-iso --git --header --group" # https://github.com/ogham/exa
 alias qrcode=qrcode-terminal # create qrcode from given text
 alias ni="node $DOTFILES/cli.js setup-npm-module"
 alias nr=npm-run # run with npm scoped environment

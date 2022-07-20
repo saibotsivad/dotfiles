@@ -2,20 +2,10 @@
 
 const { networkInterfaces } = require('os')
 
-const nets = networkInterfaces()
-const results = {}
-
-for (const name of Object.keys(nets).sort()) {
-	const ips = nets[name]
-		.map(net => {
-			// Skip over non-IPv4 and internal (i.e. 127.0.0.1) addresses
-			// 'IPv4' is in Node <= 17, from 18 it's a number 4 or 6
-			const familyV4Value = typeof net.family === 'string' ? 'IPv4' : 4
-			if (net.family === familyV4Value && !net.internal) return net.address
-		})
-		.filter(Boolean)
-	if (ips.length) {
-		console.log(`${name}:`)
-		for (const ip of ips) console.log(ip)
-	}
+for (const [ name, ints ] of Object.entries(networkInterfaces())) {
+	const ips = ints
+		.filter(i => !i.internal && [ 'IPv4', 4 ].includes(i.family))
+		.map(i => i.address)
+		.join('\n')
+	if (ips.length) console.log(`${name}:\n${ips}`)
 }

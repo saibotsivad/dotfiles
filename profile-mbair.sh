@@ -16,5 +16,3 @@ source $SCRIPTS/profile.sh
 # export BEGINPM_ROOT="$DEVELOPMENT/beginpm"
 # or
 # alias init="beginpm saibotsivad/beginpm-opinions"
-
-alias cordova="../node_modules/cordova/bin/cordova"

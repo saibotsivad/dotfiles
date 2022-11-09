@@ -6,13 +6,12 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 # where everything lives
 export DEVELOPMENT=$HOME/Development
 export DOTFILES=$DEVELOPMENT/dotfiles
-export INKDROP_BACKUP_FOLDER=$DEVELOPMENT/inkdrop-sync
+export DOTFILE_LOGS=$DOTFILES/logs
 
 # bring on the scripts
 source $DOTFILES/script/colors.sh
 source $DOTFILES/script/git-completion.sh
-source $DOTFILES/script/npm-publish.sh
-source $DOTFILES/script/commit-inkdrop.sh
+source $DOTFILES/script/commit-folder-changes.sh
 
 # import the private bits
 source $DOTFILES/secrets.sh
@@ -27,7 +26,6 @@ export CUSTOM_BINS=$DEVELOPMENT/bins
 export CARGO_ENV="$HOME/.cargo/bin"
 
 export PATH=$LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PERSONAL_PATH_BINS:$CUSTOM_BINS:$CARGO_ENV:$PATH
-
 
 # TODO need to figure this out better, should run on all machines that have it
 # setup rbenv, a ruby environment manager
@@ -46,30 +44,39 @@ export PATH=$LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PERSONA
 #alias redis=$DEVELOPMENT/redis/src/redis-server
 #alias redis-cli=$DEVELOPMENT/redis/src/redis-cli
 
-# app shortcuts
-alias ll="exa -1 -l -F --all --color-scale --group-directories-first --time-style=long-iso --git --header --group" # https://github.com/ogham/exa
-alias qrcode=qrcode-terminal # create qrcode from given text
-alias ni="node $DOTFILES/cli.js setup-npm-module"
-alias nr=npm-run # run with npm scoped environment
-alias passphrase="generate-passphrase" # uses `generate-passphrase-cli`
-alias og=gh-home # open current folder in github if possible
-alias on=npm-home # open current folder in npm if possible
+# ======== app shortcuts ========
+
+alias ll="exa -1 -l -F --all --color-scale --group-directories-first --time-style=long-iso --git --header --group"
+# https://github.com/ogham/exa
+# install with homebrew: brew install exa
+
 alias stree="open -a SourceTree ." # open SourceTree in current folder
 alias sublime="open -a 'Sublime Text.app'" # open a file in sublime text editor
-alias chrome="open -a Google\ Chrome --args --disable-web-security --user-data-dir"
+alias badchrome="open -a Google\ Chrome --args --disable-web-security --user-data-dir"
 
-# useful commands
-alias showhidden="defaults write com.apple.finder AppleShowAllFiles YES; killall -KILL Finder" # show hidden files
+# ======== useful commands ========
+
+# Show all hidden files. Requires restarting finder.
+alias showhidden="defaults write com.apple.finder AppleShowAllFiles YES; killall -KILL Finder"
 alias reload="source ~/.profile" # reload this file
 alias dnsflush="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder; echo dns flushed" # flush dns cache
 alias gitpruneorigin="git remote prune origin" # clean removed branches
 alias gitpruneupstream="git remote prune upstream" # clean removed branches
 
+# ======== homebrew ========
+# install here: https://brew.sh/
+# add to shell
+eval "$(/opt/homebrew/bin/brew shellenv)"
+# helper
 function brewinfo () {
-    echo "list all installed brew things"
+    echo "List all the things installed by homebrew."
     echo "left side = deps, right side = things using thing on left"
     brew list -1 | while read cask; do echo -ne "\x1B[1;34m $cask \x1B[0m"; brew uses $cask --installed | awk '{printf(" %s ", $0)}'; echo ""; done
 }
+# disable homebrew analytics
+export HOMEBREW_NO_ANALYTICS=1
+
+# ======== other useful stuff ========
 
 function jdate () {
     echo "
@@ -84,9 +91,6 @@ function jdate () {
         }
     " | node
 }
-
-# disable homebrew analytics
-export HOMEBREW_NO_ANALYTICS=1
 
 # disable aws analytics
 export SAM_CLI_TELEMETRY=0

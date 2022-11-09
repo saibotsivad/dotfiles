@@ -2,10 +2,6 @@
 
 Dotfiles for command line stuff.
 
-## personal note:
-
-To setup a new computer, log in to the Dropbox website and view the computer setup file.
-
 ## run setup
 
 In this folder you will want to run:
@@ -14,29 +10,13 @@ In this folder you will want to run:
 
 Where `COMPUTER` is any of the computer names.
 
-## npm
+## new computer
 
-With npm@5+ you can use `npx`, so I also turned this into a handy dandy npm launcher thing.
+You'll want to copy one of the `./setup-COMPUTER.sh` files, e.g.:
 
-You can do something like:
+    cp setup-mbair.sh setup-COMPUTER.sh
 
-```sh
-npx saibotsivad/dotfiles $COMMAND --param=$PARAM
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## launch on login
 
 To launch commands when logging in, you can do this:
 
@@ -53,17 +33,6 @@ To launch commands when logging in, you can do this:
     Add this file in System Preferences > Accounts > Login items
 
 note that the file can be anywhere, doesn't have to end with .cmd either. just chmod +x it
-
-
-
-
-
-
-
-
-
-
-
 
 
 

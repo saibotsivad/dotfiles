@@ -26,8 +26,21 @@ export PERSONAL_PATH_BINS=$DOTFILES/bin
 export CUSTOM_BINS=$DEVELOPMENT/bins
 export CARGO_ENV="$HOME/.cargo/bin"
 
-
 export PATH=$LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PERSONAL_PATH_BINS:$CUSTOM_BINS:$CARGO_ENV:$PATH
+
+
+# TODO need to figure this out better, should run on all machines that have it
+# setup rbenv, a ruby environment manager
+# installation of `rbenv` is done with homebrew: `brew install rbenv`
+# install a version of ruby: rbenv install 2.5.3
+# after install need to do: rbenv rehash
+# then install: gem install bundler
+# inside a folder: bundle install
+# e.g. NOT `bundler` it's `bundle`
+# eval "$(rbenv init -)"
+# export RVM_PATH="$HOME/.rvm/bin"
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
 
 # installed apps
 #alias redis=$DEVELOPMENT/redis/src/redis-server
@@ -43,6 +56,7 @@ alias og=gh-home # open current folder in github if possible
 alias on=npm-home # open current folder in npm if possible
 alias stree="open -a SourceTree ." # open SourceTree in current folder
 alias sublime="open -a 'Sublime Text.app'" # open a file in sublime text editor
+alias chrome="open -a Google\ Chrome --args --disable-web-security --user-data-dir"
 
 # useful commands
 alias showhidden="defaults write com.apple.finder AppleShowAllFiles YES; killall -KILL Finder" # show hidden files
@@ -50,6 +64,26 @@ alias reload="source ~/.profile" # reload this file
 alias dnsflush="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder; echo dns flushed" # flush dns cache
 alias gitpruneorigin="git remote prune origin" # clean removed branches
 alias gitpruneupstream="git remote prune upstream" # clean removed branches
+
+function brewinfo () {
+    echo "list all installed brew things"
+    echo "left side = deps, right side = things using thing on left"
+    brew list -1 | while read cask; do echo -ne "\x1B[1;34m $cask \x1B[0m"; brew uses $cask --installed | awk '{printf(" %s ", $0)}'; echo ""; done
+}
+
+function jdate () {
+    echo "
+        const input = '${1}'
+        if (/^[0-9]+$/.test(input)) {
+            process.stdout.write(new Date(parseInt(input, 10) * 1000).toISOString())
+        } else if (input) {
+            process.stdout.write(Math.round(new Date(input).getTime() / 1000).toString())
+        } else {
+            const now = new Date()
+            process.stdout.write(Math.floor(now.getTime() / 1000).toString() + '    ' + now.toISOString())
+        }
+    " | node
+}
 
 # disable homebrew analytics
 export HOMEBREW_NO_ANALYTICS=1

@@ -106,6 +106,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 # enable android debug tools if available
-if [ -d "$HOME/Development/adb-fastboot/platform-tools" ] ; then
-	export PATH="$HOME/Development/adb-fastboot/platform-tools:$PATH"
+if [ -d "$DEVELOPMENT/adb-fastboot/platform-tools" ] ; then
+	export PATH="$DEVELOPMENT/adb-fastboot/platform-tools:$PATH"
 fi

@@ -6,15 +6,52 @@ Dotfiles for command line stuff.
 
 In this folder you will want to run:
 
-    ./setup-COMPUTER.sh
+    ./setup.sh FLAVOR
 
-Where `COMPUTER` is any of the computer names.
+Where `FLAVOR` is a name unique to the environment / computer you are setting up.
 
-## new computer
+You probably need the Xcode command line tools installed, which you can do with:
 
-You'll want to copy one of the `./setup-COMPUTER.sh` files, e.g.:
+```bash
+xcode-select --install
+```
 
-    cp setup-mbair.sh setup-COMPUTER.sh
+## applications
+
+Not all are needed.
+
+Many of these are installed through Homebrew, which you can install [here](https://brew.sh/).
+
+### NodeJS version manager - [nvm](https://github.com/nvm-sh/nvm)
+
+You need the Xcode command line tools installed first!
+
+Install instructions on the Github page.
+
+```bash
+# install a version of nodejs
+nvm install VERSION
+# set a version as the default
+nvm alias default VERSION
+```
+
+### Ruby version manager - [rbenv](https://github.com/rbenv/rbenv)
+
+```bash
+# install
+brew install rbenv ruby-build
+# install a ruby version
+rbenv install VERSION
+```
+
+### Terraform version manager - [tfenv](https://github.com/tfutils/tfenv)
+
+```bash
+# install
+brew install tfenv
+# install a version of terraform
+tfenv install VERSION
+```
 
 ## launch on login
 

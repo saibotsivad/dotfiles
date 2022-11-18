@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#
+# Run this command to rotate *all* keys stored in aws-vault.
+#
+# Unfortunately, it pops up about a bajillion Keychain-access prompts, but
+# that's the cost of show-biz.
+#
+
+AWS_VAULT=`which aws-vault`
+PROFILES=($(fgrep profile ~/.aws/config | awk '{print $2}' | sed 's/]//'))
+
+for PROFILE in "${PROFILES[@]}"; do
+	$AWS_VAULT rotate --no-session "${PROFILE}"
+done

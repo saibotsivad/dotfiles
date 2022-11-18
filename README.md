@@ -22,6 +22,14 @@ Not all are needed.
 
 Many of these are installed through Homebrew, which you can install [here](https://brew.sh/).
 
+### AWS Vault - [aws-vault](https://github.com/99designs/aws-vault)
+
+Used to store AWS credentials in macOS Keychain, instead of plaintext.
+
+```bash
+brew install --cask aws-vault
+```
+
 ### NodeJS version manager - [nvm](https://github.com/nvm-sh/nvm)
 
 You need the Xcode command line tools installed first!

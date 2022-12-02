@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+const { networkInterfaces } = require('os')
+
+for (const [ name, ints ] of Object.entries(networkInterfaces())) {
+	const ips = ints
+		.filter(i => !i.internal && [ 'IPv4', 4 ].includes(i.family))
+		.map(i => i.address)
+		.join('\n')
+	if (ips.length) console.log(`${name}:\n${ips}`)
+}

@@ -2,41 +2,66 @@
 
 Dotfiles for command line stuff.
 
-## personal note:
-
-To setup a new computer, log in to the Dropbox website and view the computer setup file.
-
 ## run setup
 
 In this folder you will want to run:
 
-    ./setup-COMPUTER.sh
+    ./setup.sh FLAVOR
 
-Where `COMPUTER` is any of the computer names.
+Where `FLAVOR` is a name unique to the environment / computer you are setting up.
 
-## npm
+You probably need the Xcode command line tools installed, which you can do with:
 
-With npm@5+ you can use `npx`, so I also turned this into a handy dandy npm launcher thing.
-
-You can do something like:
-
-```sh
-npx saibotsivad/dotfiles $COMMAND --param=$PARAM
+```bash
+xcode-select --install
 ```
 
+## applications
 
+Not all are needed.
 
+Many of these are installed through Homebrew, which you can install [here](https://brew.sh/).
 
+### AWS Vault - [aws-vault](https://github.com/99designs/aws-vault)
 
+Used to store AWS credentials in macOS Keychain, instead of plaintext.
 
+```bash
+brew install --cask aws-vault
+```
 
+### NodeJS version manager - [nvm](https://github.com/nvm-sh/nvm)
 
+You need the Xcode command line tools installed first!
 
+Install instructions on the Github page.
 
+```bash
+# install a version of nodejs
+nvm install VERSION
+# set a version as the default
+nvm alias default VERSION
+```
 
+### Ruby version manager - [rbenv](https://github.com/rbenv/rbenv)
 
+```bash
+# install
+brew install rbenv ruby-build
+# install a ruby version
+rbenv install VERSION
+```
 
+### Terraform version manager - [tfenv](https://github.com/tfutils/tfenv)
 
+```bash
+# install
+brew install tfenv
+# install a version of terraform
+tfenv install VERSION
+```
+
+## launch on login
 
 To launch commands when logging in, you can do this:
 
@@ -53,17 +78,6 @@ To launch commands when logging in, you can do this:
     Add this file in System Preferences > Accounts > Login items
 
 note that the file can be anywhere, doesn't have to end with .cmd either. just chmod +x it
-
-
-
-
-
-
-
-
-
-
-
 
 
 

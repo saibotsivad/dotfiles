@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "description": "Dotfiles for command line stuff. The npm installer is a thing to do CLI tools.",
+  "type": "module",
   "main": "cli.js",
   "repository": {
     "type": "git",
@@ -15,8 +16,11 @@
   },
   "homepage": "https://github.com/saibotsivad/dotfiles#readme",
   "dependencies": {
-    "glob": "^7.1.2",
-    "minimist": "^1.2.0",
+    "@saibotsivad/blockdown": "^3.0.0",
+    "glob": "^8.0.3",
+    "js-yaml": "^4.1.0",
+    "minimist": "^1.2.7",
+    "tiny-glob": "^0.2.9",
     "wait-for-user-input": "^1.0.0"
   }
 }

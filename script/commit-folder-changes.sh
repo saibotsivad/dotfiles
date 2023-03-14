@@ -39,4 +39,5 @@ commit_folder_changes () {
 		git commit -am "cronjob update by ${DOTFILE_FLAVOR}"
 		git push -u origin main
 	fi
+	cd -
 }

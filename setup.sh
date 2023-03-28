@@ -21,7 +21,7 @@ export DOTFILE_FLAVOR=${FLAVOR}
 # bring on the profile
 source \$SCRIPTS/profile.sh
 
-# ========== per-computer customization after here ==========
+# ========== per-computer customization after here, but NOT SECRETS! those go in ./secrets.sh ==========
 EOM
 
 chmod +x ${PROFILE_FLAVOR}

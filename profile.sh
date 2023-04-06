@@ -63,6 +63,13 @@ alias dnsflush="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder; e
 alias gitpruneorigin="git remote prune origin" # clean removed branches
 alias gitpruneupstream="git remote prune upstream" # clean removed branches
 
+# ======== deno =========
+# manage deno versions using dvm, installation instructions here: https://deno.land/x/dvm@v1.5.5
+# only add dvm if it's installed
+if [ -d "$HOME/.dvm/bin" ] ; then
+    export PATH="$HOME/.dvm/bin:$PATH"
+fi
+
 # ======== homebrew ========
 # install here: https://brew.sh/
 # add to shell

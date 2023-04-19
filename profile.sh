@@ -10,8 +10,9 @@ export DOTFILE_LOGS=$DOTFILES/logs
 
 # bring on the scripts
 source $DOTFILES/script/colors.sh
-source $DOTFILES/script/git-completion.sh
 source $DOTFILES/script/commit-folder-changes.sh
+source $DOTFILES/script/git-completion.sh
+source $DOTFILES/script/hass-active-meeting.sh
 
 # import the private bits
 source $DOTFILES/secrets.sh

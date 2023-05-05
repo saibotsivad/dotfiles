@@ -31,7 +31,11 @@ hass_active_meeting_update () {
 		IN_MEETING=1
 	fi
 
-	# TODO: look for Slack huddle
+	# Look for Slack huddle
+	# tobiasdavis      83963   2.5  0.2 409023376  35584   ??  S    10:25AM   0:24.56 /Applications/Slack.app/Contents/Frameworks/Slack Helper (Plugin).app/Contents/MacOS/Slack Helper (Plugin) --type=utility --utility-sub-type=video_capture.mojom.VideoCaptureService --lang=en-US --service-sandbox-type=none --enable-logging --message-loop-type-ui --user-data-dir=/Users/tobiasdavis/Library/Application Support/Slack --standard-schemes=app,slack-webapp-dev --enable-sandbox --secure-schemes=app,slack-webapp-dev --bypasscsp-schemes=slack-webapp-dev --cors-schemes=slack-webapp-dev --fetch-schemes=slack-webapp-dev --service-worker-schemes=slack-webapp-dev --streaming-schemes --enable-logging --log-file=/Users/tobiasdavis/Library/Application Support/Slack/logs/default/electron_debug.log --shared-files --field-trial-handle=1718379636,r,18334022373887770749,14696868611440964740,131072 --disable-features=AllowAggressiveThrottlingWithWebSocket,CalculateNativeWinOcclusion,HardwareMediaKeyHandling,IntensiveWakeUpThrottling,LogJsConsoleMessages,RequestInitiatorSiteLockEnfocement,SpareRendererForSitePerProcess,WebRtcHideLocalIpsWithMdns,WinRetrieveSuggestionsOnlyOnDemand
+	if ps aux | grep --quiet "[S]lack Helper.*VideoCaptureService"; then
+		IN_MEETING=1
+	fi
 
 	# TODO: look for active Zoom meeting
 
@@ -54,8 +58,10 @@ hass_active_meeting_update () {
 	if [[ $NEEDS_PUSHED -eq 1 ]]; then
 		if [[ $IN_MEETING -eq 1 ]]; then
 			MEETING_STATE="true"
+			SCENE_STATE="start"
 		else
 			MEETING_STATE="false"
+			SCENE_STATE="stop"
 		fi
 		echo "updating meeting status to ${IN_MEETING}"
 		# https://developers.home-assistant.io/docs/api/rest#actions
@@ -65,6 +71,13 @@ hass_active_meeting_update () {
 			--request POST \
 			--data "{\"state\":${MEETING_STATE}}" \
 			"${HASS_URL}/api/states/input_boolean.tobias_in_meeting"
+		curl \
+			-H "Authorization: Bearer $HASS_TOKEN" \
+			-H "Content-Type: application/json" \
+			--request POST \
+			--data "{\"entity_id\":\"scene.tobias_meeting_${SCENE_STATE}\"}" \
+			"${HASS_URL}/api/services/scene/turn_on"
 		printf '%s' "${IN_MEETING}" > $LOCAL_STATE_FILE
 	fi
 }
+

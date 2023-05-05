@@ -25,11 +25,11 @@ lock () {
 	pmset displaysleepnow
 	# Make sure knowledge store is backed up.
 	obsave
-	# Turn off the excersize fan, if it's on.
+	# Kick off the appropriate HASS scene.
 	curl \
 		-H "Authorization: Bearer $HASS_TOKEN" \
 		-H "Content-Type: application/json" \
 		--request POST \
-		--data '{"entity_id":"light.officefan"}' \
-		"${HASS_URL}/api/services/light/turn_off"
+		--data '{"entity_id":"scene.leave_office"}' \
+		"${HASS_URL}/api/services/scene/turn_on"
 }

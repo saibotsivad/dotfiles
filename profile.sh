@@ -45,6 +45,9 @@ export PATH=$LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PERSONA
 #alias redis=$DEVELOPMENT/redis/src/redis-server
 #alias redis-cli=$DEVELOPMENT/redis/src/redis-cli
 
+# ======== brew install common =======
+# tree
+
 # ======== app shortcuts ========
 
 alias ll="exa -1 -l -F --all --color-scale --group-directories-first --time-style=long-iso --git --header --group"
@@ -117,7 +120,12 @@ export PS1="$C_LIGHTGRAY\n$C_LIGHTGRAY\D{%Y-%m-%d}${C_CYAN}T$C_LIGHTGRAY\D{%H:%M
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
+# enable rancher if available, install from: https://rancherdesktop.io/
+if [ -d "$HOME/.rd/bin" ] ; then
+    export PATH="$PATH:$HOME/.rd/bin"
+fi
+
 # enable android debug tools if available
 if [ -d "$DEVELOPMENT/adb-fastboot/platform-tools" ] ; then
-	export PATH="$DEVELOPMENT/adb-fastboot/platform-tools:$PATH"
+    export PATH="$PATH:$DEVELOPMENT/adb-fastboot/platform-tools"
 fi

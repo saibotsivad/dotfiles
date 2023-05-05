@@ -3,12 +3,28 @@
 #
 # This is the script to paste into Alfred, to append treadmill miles walked to todays note.
 #
+# Set language to "/bin/bash" and use "with input as argv"
+#
+# On the "Post Notification" step, set "Text" to: {query}
+#
 
-query="{query}"
-
-echo -n $query
+query="${1}"
 
 NOW_DATE=$(date +%Y-%m-%d)
 NOW_TIME=$(date +%R)
 
-printf "\n#walk #treadmill $NOW_TIME $query mile\n" >> "/Users/saibotsivad/Dropbox/Obsidian/ProbablyEverything/$NOW_DATE.md"
+FILE="/Users/tobiasdavis/Documents/Knowledge/Kappa Streams/Treadmill.md"
+
+comma_count=$(echo $query | tr -cd , | wc -c)
+
+if [[ $comma_count -eq "1" ]]; then
+	query="${query},2.5mph"
+fi
+if [[ "${query}" != *mph ]]; then
+	query="${query}mph"
+fi
+
+treadmill_line="${NOW_DATE},${NOW_TIME},${query}"
+echo "${treadmill_line}" >> "${FILE}"
+
+echo -n "${treadmill_line}"

@@ -103,6 +103,24 @@ function jdate () {
     " | node
 }
 
+# Immediately lock the screen, then do some wrapup tidying stuff.
+# Alfred Workflow, add "Run Script" with bash: source /Users/tobiasdavis/.profile && lock_macos_computer
+lock_macos_computer () {
+    # This only sets the display to sleep, to make it also lock the screen
+    # you need to update "System Settings > Lock Screen > Require password after screen saver..."
+    # set this to "Immediately".
+    pmset displaysleepnow
+    # Make sure knowledge store is backed up.
+    obsave
+    # Kick off the appropriate HASS scene.
+    curl \
+        -H "Authorization: Bearer $HASS_TOKEN" \
+        -H "Content-Type: application/json" \
+        --request POST \
+        --data '{"entity_id":"scene.leave_office"}' \
+        "${HASS_URL}/api/services/scene/turn_on"
+}
+
 # disable aws analytics
 export SAM_CLI_TELEMETRY=0
 

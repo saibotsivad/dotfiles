@@ -147,3 +147,8 @@ fi
 if [ -d "$DEVELOPMENT/adb-fastboot/platform-tools" ] ; then
     export PATH="$PATH:$DEVELOPMENT/adb-fastboot/platform-tools"
 fi
+
+# enable go if available
+if [ -d "/usr/local/go/bin" ] ; then
+    export PATH="$PATH:/usr/local/go/bin"
+fi

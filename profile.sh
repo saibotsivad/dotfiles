@@ -10,8 +10,9 @@ export DOTFILE_LOGS=$DOTFILES/logs
 
 # bring on the scripts
 source $DOTFILES/script/colors.sh
-source $DOTFILES/script/git-completion.sh
 source $DOTFILES/script/commit-folder-changes.sh
+source $DOTFILES/script/git-completion.sh
+source $DOTFILES/script/hass-active-meeting.sh
 
 # import the private bits
 source $DOTFILES/secrets.sh
@@ -44,6 +45,9 @@ export PATH=$LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PERSONA
 #alias redis=$DEVELOPMENT/redis/src/redis-server
 #alias redis-cli=$DEVELOPMENT/redis/src/redis-cli
 
+# ======== brew install common =======
+# tree
+
 # ======== app shortcuts ========
 
 #
@@ -65,6 +69,13 @@ alias reload="source ~/.profile" # reload this file
 alias dnsflush="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder; echo dns flushed" # flush dns cache
 alias gitpruneorigin="git remote prune origin" # clean removed branches
 alias gitpruneupstream="git remote prune upstream" # clean removed branches
+
+# ======== deno =========
+# manage deno versions using dvm, installation instructions here: https://deno.land/x/dvm@v1.5.5
+# only add dvm if it's installed
+if [ -d "$HOME/.dvm/bin" ] ; then
+    export PATH="$HOME/.dvm/bin:$PATH"
+fi
 
 # ======== homebrew ========
 # install here: https://brew.sh/
@@ -95,6 +106,24 @@ function jdate () {
     " | node
 }
 
+# Immediately lock the screen, then do some wrapup tidying stuff.
+# Alfred Workflow, add "Run Script" with bash: source /Users/tobiasdavis/.profile && lock_macos_computer
+lock_macos_computer () {
+    # This only sets the display to sleep, to make it also lock the screen
+    # you need to update "System Settings > Lock Screen > Require password after screen saver..."
+    # set this to "Immediately".
+    pmset displaysleepnow
+    # Make sure knowledge store is backed up.
+    obsave
+    # Kick off the appropriate HASS scene.
+    curl \
+        -H "Authorization: Bearer $HASS_TOKEN" \
+        -H "Content-Type: application/json" \
+        --request POST \
+        --data '{"entity_id":"scene.leave_office"}' \
+        "${HASS_URL}/api/services/scene/turn_on"
+}
+
 # disable aws analytics
 export SAM_CLI_TELEMETRY=0
 
@@ -112,7 +141,17 @@ export PS1="$C_LIGHTGRAY\n$C_LIGHTGRAY\D{%Y-%m-%d}${C_CYAN}T$C_LIGHTGRAY\D{%H:%M
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
+# enable rancher if available, install from: https://rancherdesktop.io/
+if [ -d "$HOME/.rd/bin" ] ; then
+    export PATH="$PATH:$HOME/.rd/bin"
+fi
+
 # enable android debug tools if available
 if [ -d "$DEVELOPMENT/adb-fastboot/platform-tools" ] ; then
-	export PATH="$DEVELOPMENT/adb-fastboot/platform-tools:$PATH"
+    export PATH="$PATH:$DEVELOPMENT/adb-fastboot/platform-tools"
+fi
+
+# enable go if available
+if [ -d "/usr/local/go/bin" ] ; then
+    export PATH="$PATH:/usr/local/go/bin"
 fi

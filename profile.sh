@@ -46,6 +46,9 @@ export PATH=$LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PERSONA
 
 # ======== app shortcuts ========
 
+#
+alias ubuntu-always-on="mosh saibot@192.168.1.100"
+
 alias ll="exa -1 -l -F --all --color-scale --group-directories-first --time-style=long-iso --git --header --group"
 # https://github.com/ogham/exa
 # install with homebrew: brew install exa

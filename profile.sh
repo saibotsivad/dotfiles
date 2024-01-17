@@ -26,8 +26,9 @@ export PERSONAL_PATH_BINS=$DOTFILES/bin
 export CUSTOM_BINS=$DEVELOPMENT/bins
 export SUBLIME_PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin"
 export CARGO_ENV="$HOME/.cargo/bin"
+export RANCHER_PATH="$HOME/.rd/bin"
 
-export PATH=$LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PERSONAL_PATH_BINS:$CUSTOM_BINS:$CARGO_ENV:$SUBLIME_PATH:$PATH
+export PATH=$LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PERSONAL_PATH_BINS:$CUSTOM_BINS:$CARGO_ENV:$SUBLIME_PATH:$RANCHER_PATH:$PATH
 
 # TODO need to figure this out better, should run on all machines that have it
 # setup rbenv, a ruby environment manager

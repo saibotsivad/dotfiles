@@ -80,16 +80,19 @@ fi
 
 # ======== homebrew ========
 # install here: https://brew.sh/
+# ---
+# disable homebrew analytics
+export HOMEBREW_NO_ANALYTICS
 # add to shell
-eval "$(/opt/homebrew/bin/brew shellenv)"
+if [ -d "/opt/homebrew/bin" ]; then
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 # helper
 function brewinfo () {
     echo "List all the things installed by homebrew."
     echo "left side = deps, right side = things using thing on left"
     brew list -1 | while read cask; do echo -ne "\x1B[1;34m $cask \x1B[0m"; brew uses $cask --installed | awk '{printf(" %s ", $0)}'; echo ""; done
 }
-# disable homebrew analytics
-export HOMEBREW_NO_ANALYTICS=1
 
 # ======== other useful stuff ========
 
@@ -136,7 +139,6 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # terminal colors
 export PS1="$C_LIGHTGRAY\n$C_LIGHTGRAY\D{%Y-%m-%d}${C_CYAN}T$C_LIGHTGRAY\D{%H:%M:%S} $C_LIGHTGREEN\u$C_LIGHTGRAY@$C_LIGHTGREEN$DOTFILE_FLAVOR $C_LIGHTGRAY: $C_LIGHTYELLOW\w $C_LIGHTCYAN"'$(__git_ps1 "(%s)")'"\n$C_LIGHTGRAY\$ $C_DEFAULT "
-# export PS1="$C_LIGHTGREEN\w \n$C_LIGHTGRAY\$ $C_DEFAULT "
 
 # load node version manager
 export NVM_DIR="$HOME/.nvm"
@@ -156,3 +158,14 @@ fi
 if [ -d "/usr/local/go/bin" ] ; then
     export PATH="$PATH:/usr/local/go/bin"
 fi
+
+if [ -d "$DEVELOPMENT/git-clean" ]; then
+    export WORKTREE_REPO_DIR="$DEVELOPMENT/git-clean"
+    export WORKTREE_SESSION_DIR="$DEVELOPMENT/git-session"
+    source "$WORKTREE_REPO_DIR/git-worktree/wt.function.sh"
+fi
+
+if [ -d "$HOME/.local/bin" ]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+

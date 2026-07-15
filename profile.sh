@@ -74,6 +74,14 @@ alias dnsflush="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder; e
 alias gitpruneorigin="git remote prune origin" # clean removed branches
 alias gitpruneupstream="git remote prune upstream" # clean removed branches
 
+# Use mosh to start in a tmux session. If you have SSH aliases set up you can do:
+#   tmosh myserver
+# And if you want to start a named tmux session you just add the name:
+#   tmosh myserver mymonitor
+tmosh() {
+	mosh "$1" -- tmux new-session -Q -s "${2:main}"
+}
+
 # ======== deno =========
 # manage deno versions using dvm, installation instructions here: https://deno.land/x/dvm@v1.5.5
 # only add dvm if it's installed

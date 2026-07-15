@@ -79,7 +79,7 @@ alias gitpruneupstream="git remote prune upstream" # clean removed branches
 # And if you want to start a named tmux session you just add the name:
 #   tmosh myserver mymonitor
 tmosh() {
-	mosh "$1" -- tmux new-session -A -s "${2:main}"
+	mosh "$1" -- tmux new-session -A -s "${2:-main}"
 }
 
 # ======== deno =========

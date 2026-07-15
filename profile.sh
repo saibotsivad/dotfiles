@@ -7,12 +7,14 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 export DEVELOPMENT=$HOME/Development
 export DOTFILES=$DEVELOPMENT/dotfiles
 export DOTFILE_LOGS=$DOTFILES/logs
+export MODELS=$DEVELOPMENT/models
 
 # bring on the scripts
 source $DOTFILES/script/colors.sh
 source $DOTFILES/script/commit-folder-changes.sh
 source $DOTFILES/script/git-completion.sh
 source $DOTFILES/script/hass-active-meeting.sh
+source $DOTFILES/script/download-youtube.sh
 
 # import the private bits
 source $DOTFILES/secrets.sh
@@ -25,10 +27,11 @@ export RUBY_BIN_PATH=$HOME/.gem/ruby/2.3.0/bin
 export PERSONAL_PATH_BINS=$DOTFILES/bin
 export CUSTOM_BINS=$DEVELOPMENT/bins
 export SUBLIME_PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin"
+export SUBLIME_MERGE_PATH="/Applications/Sublime Merge.app/Contents/SharedSupport/bin"
 export CARGO_ENV="$HOME/.cargo/bin"
 export RANCHER_PATH="$HOME/.rd/bin"
 
-export PATH=$LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PERSONAL_PATH_BINS:$CUSTOM_BINS:$CARGO_ENV:$SUBLIME_PATH:$RANCHER_PATH:$PATH
+export PATH=$LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PERSONAL_PATH_BINS:$CUSTOM_BINS:$CARGO_ENV:$SUBLIME_PATH:$SUBLIME_MERGE_PATH:$RANCHER_PATH:$PATH
 
 # TODO need to figure this out better, should run on all machines that have it
 # setup rbenv, a ruby environment manager
@@ -54,9 +57,9 @@ export PATH=$LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PERSONA
 #
 alias ubuntu-always-on="mosh saibot@192.168.1.100"
 
-alias ll="exa -1 -l -F --all --color-scale --group-directories-first --time-style=long-iso --git --header --group"
-# https://github.com/ogham/exa
-# install with homebrew: brew install exa
+alias ll="eza -1 -l -F --all --color-scale --group-directories-first --time-style=long-iso --git --header --group"
+# https://github.com/eza-community/eza
+# install with homebrew: brew install eza
 
 alias stree="open -a SourceTree ." # open SourceTree in current folder
 # alias sublime="open -a 'Sublime Text.app'" # open a file in sublime text editor
@@ -65,7 +68,7 @@ alias badchrome="open -a Google\ Chrome --args --disable-web-security --user-dat
 # ======== useful commands ========
 
 # Show all hidden files. Requires restarting finder.
-alias showhidden="defaults write com.apple.finder AppleShowAllFiles YES; killall -KILL Finder"
+alias showhidden="defaults write -g AppleShowAllFiles YES; killall -KILL Finder"
 alias reload="source ~/.profile" # reload this file
 alias dnsflush="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder; echo dns flushed" # flush dns cache
 alias gitpruneorigin="git remote prune origin" # clean removed branches

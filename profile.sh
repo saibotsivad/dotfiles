@@ -19,6 +19,7 @@ source $DOTFILES/secrets.sh
 
 # anything to add to the path
 export LOCAL_BIN="/usr/local/bin"
+export OTHER_LOCAL_BIN="$HOME/.local/bin"
 export MONGODB_BIN_PATH=$DEVELOPMENT/mongodb/bin
 export NGROK_BIN_PATH=$DEVELOPMENT/ngrok
 export RUBY_BIN_PATH=$HOME/.gem/ruby/2.3.0/bin
@@ -28,7 +29,7 @@ export SUBLIME_PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin"
 export CARGO_ENV="$HOME/.cargo/bin"
 export RANCHER_PATH="$HOME/.rd/bin"
 
-export PATH=$LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PERSONAL_PATH_BINS:$CUSTOM_BINS:$CARGO_ENV:$SUBLIME_PATH:$RANCHER_PATH:$PATH
+export PATH=$LOCAL_BIN:$OTHER_LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PERSONAL_PATH_BINS:$CUSTOM_BINS:$CARGO_ENV:$SUBLIME_PATH:$RANCHER_PATH:$PATH
 
 # TODO need to figure this out better, should run on all machines that have it
 # setup rbenv, a ruby environment manager
@@ -71,6 +72,13 @@ alias dnsflush="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder; e
 alias gitpruneorigin="git remote prune origin" # clean removed branches
 alias gitpruneupstream="git remote prune upstream" # clean removed branches
 
+# ======== https://bun.com/ =========
+# manage bun versions using bvm: https://github.com/MrHacker26/bvm
+# only add bun if it's installed
+if [ -d "$HOME/.bun/bin" ] ; then
+    export PATH="$HOME/.bun/bin:$PATH"
+fi
+
 # ======== deno =========
 # manage deno versions using dvm, installation instructions here: https://deno.land/x/dvm@v1.5.5
 # only add dvm if it's installed
@@ -90,6 +98,9 @@ function brewinfo () {
 }
 # disable homebrew analytics
 export HOMEBREW_NO_ANALYTICS=1
+
+# ======== serena ========
+alias sserena="uv run --directory $(pwd) serena"
 
 # ======== other useful stuff ========
 
@@ -145,6 +156,11 @@ export NVM_DIR="$HOME/.nvm"
 # enable rancher if available, install from: https://rancherdesktop.io/
 if [ -d "$HOME/.rd/bin" ] ; then
     export PATH="$PATH:$HOME/.rd/bin"
+fi
+
+# enable openjdk if available
+if [ -d "/opt/homebrew/opt/openjdk@17/bin" ] ; then
+    export PATH="$PATH:/opt/homebrew/opt/openjdk@17/bin"
 fi
 
 # enable android debug tools if available

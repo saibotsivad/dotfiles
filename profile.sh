@@ -7,12 +7,14 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 export DEVELOPMENT=$HOME/Development
 export DOTFILES=$DEVELOPMENT/dotfiles
 export DOTFILE_LOGS=$DOTFILES/logs
+export MODELS=$DEVELOPMENT/models
 
 # bring on the scripts
 source $DOTFILES/script/colors.sh
 source $DOTFILES/script/commit-folder-changes.sh
 source $DOTFILES/script/git-completion.sh
 source $DOTFILES/script/hass-active-meeting.sh
+source $DOTFILES/script/download-youtube.sh
 
 # import the private bits
 source $DOTFILES/secrets.sh
@@ -26,10 +28,11 @@ export RUBY_BIN_PATH=$HOME/.gem/ruby/2.3.0/bin
 export PERSONAL_PATH_BINS=$DOTFILES/bin
 export CUSTOM_BINS=$DEVELOPMENT/bins
 export SUBLIME_PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin"
+export SUBLIME_MERGE_PATH="/Applications/Sublime Merge.app/Contents/SharedSupport/bin"
 export CARGO_ENV="$HOME/.cargo/bin"
 export RANCHER_PATH="$HOME/.rd/bin"
 
-export PATH=$LOCAL_BIN:$OTHER_LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PERSONAL_PATH_BINS:$CUSTOM_BINS:$CARGO_ENV:$SUBLIME_PATH:$RANCHER_PATH:$PATH
+export PATH=$LOCAL_BIN:$OTHER_LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_BIN_PATH:$PERSONAL_PATH_BINS:$CUSTOM_BINS:$CARGO_ENV:$SUBLIME_PATH:$SUBLIME_MERGE_PATH:$RANCHER_PATH:$PATH
 
 # TODO need to figure this out better, should run on all machines that have it
 # setup rbenv, a ruby environment manager
@@ -55,9 +58,9 @@ export PATH=$LOCAL_BIN:$OTHER_LOCAL_BIN:$MONGODB_BIN_PATH:$NGROK_BIN_PATH:$RUBY_
 #
 alias ubuntu-always-on="mosh saibot@192.168.1.100"
 
-alias ll="exa -1 -l -F --all --color-scale --group-directories-first --time-style=long-iso --git --header --group"
-# https://github.com/ogham/exa
-# install with homebrew: brew install exa
+alias ll="eza -1 -l -F --all --color-scale --group-directories-first --time-style=long-iso --git --header --group"
+# https://github.com/eza-community/eza
+# install with homebrew: brew install eza
 
 alias stree="open -a SourceTree ." # open SourceTree in current folder
 # alias sublime="open -a 'Sublime Text.app'" # open a file in sublime text editor
@@ -66,7 +69,7 @@ alias badchrome="open -a Google\ Chrome --args --disable-web-security --user-dat
 # ======== useful commands ========
 
 # Show all hidden files. Requires restarting finder.
-alias showhidden="defaults write com.apple.finder AppleShowAllFiles YES; killall -KILL Finder"
+alias showhidden="defaults write -g AppleShowAllFiles YES; killall -KILL Finder"
 alias reload="source ~/.profile" # reload this file
 alias dnsflush="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder; echo dns flushed" # flush dns cache
 alias gitpruneorigin="git remote prune origin" # clean removed branches
@@ -79,6 +82,14 @@ if [ -d "$HOME/.bun/bin" ] ; then
     export PATH="$HOME/.bun/bin:$PATH"
 fi
 
+# Use mosh to start in a tmux session. If you have SSH aliases set up you can do:
+#   tmosh myserver
+# And if you want to start a named tmux session you just add the name:
+#   tmosh myserver mymonitor
+tmosh() {
+	mosh "$1" -- tmux new-session -A -s "${2:-main}"
+}
+
 # ======== deno =========
 # manage deno versions using dvm, installation instructions here: https://deno.land/x/dvm@v1.5.5
 # only add dvm if it's installed
@@ -88,16 +99,19 @@ fi
 
 # ======== homebrew ========
 # install here: https://brew.sh/
+# ---
+# disable homebrew analytics
+export HOMEBREW_NO_ANALYTICS
 # add to shell
-eval "$(/opt/homebrew/bin/brew shellenv)"
+if [ -d "/opt/homebrew/bin" ]; then
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 # helper
 function brewinfo () {
     echo "List all the things installed by homebrew."
     echo "left side = deps, right side = things using thing on left"
     brew list -1 | while read cask; do echo -ne "\x1B[1;34m $cask \x1B[0m"; brew uses $cask --installed | awk '{printf(" %s ", $0)}'; echo ""; done
 }
-# disable homebrew analytics
-export HOMEBREW_NO_ANALYTICS=1
 
 # ======== serena ========
 alias sserena="uv run --directory $(pwd) serena"
@@ -147,7 +161,6 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # terminal colors
 export PS1="$C_LIGHTGRAY\n$C_LIGHTGRAY\D{%Y-%m-%d}${C_CYAN}T$C_LIGHTGRAY\D{%H:%M:%S} $C_LIGHTGREEN\u$C_LIGHTGRAY@$C_LIGHTGREEN$DOTFILE_FLAVOR $C_LIGHTGRAY: $C_LIGHTYELLOW\w $C_LIGHTCYAN"'$(__git_ps1 "(%s)")'"\n$C_LIGHTGRAY\$ $C_DEFAULT "
-# export PS1="$C_LIGHTGREEN\w \n$C_LIGHTGRAY\$ $C_DEFAULT "
 
 # load node version manager
 export NVM_DIR="$HOME/.nvm"
@@ -172,3 +185,14 @@ fi
 if [ -d "/usr/local/go/bin" ] ; then
     export PATH="$PATH:/usr/local/go/bin"
 fi
+
+if [ -d "$DEVELOPMENT/git-clean" ]; then
+    export WORKTREE_REPO_DIR="$DEVELOPMENT/git-clean"
+    export WORKTREE_SESSION_DIR="$DEVELOPMENT/git-session"
+    source "$WORKTREE_REPO_DIR/git-worktree/wt.function.sh"
+fi
+
+if [ -d "$HOME/.local/bin" ]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+

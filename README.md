@@ -2,6 +2,12 @@
 
 Dotfiles for command line stuff.
 
+See which applications are not installed yet by running:
+
+```bash
+dotfile_doctor
+```
+
 ## run setup
 
 In this folder you will want to run:
@@ -78,8 +84,6 @@ To launch commands when logging in, you can do this:
     Add this file in System Preferences > Accounts > Login items
 
 note that the file can be anywhere, doesn't have to end with .cmd either. just chmod +x it
-
-
 
     Start Automator.app;
     Select "Application";

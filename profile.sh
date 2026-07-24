@@ -130,6 +130,19 @@ add_path "/Applications/Sublime Merge.app/Contents/SharedSupport/bin" "Sublime M
 # Install from: https://doc.rust-lang.org/cargo/
 add_path "$HOME/.cargo/bin" "Rust Cargo"
 
+# == LM Studio CLI ==
+# Install from: https://lmstudio.ai/docs/cli
+add_path "$HOME/.lmstudio/bin" "LM Studio CLI"
+
+# Python via `pyenv` (install with `brew install pyenv`)
+if [ -d "$HOME/.pyenv" ]; then
+	export PYENV_ROOT="$HOME/.pyenv"
+	add_path "${PYENV_ROOT}/bin" "Python (pyenv)"
+	eval "$(pyenv init - bash)"
+else
+	NOT_INSTALLED+=("Python (pyenv)")
+fi
+
 # == eza file lister ==
 # `eza` is a really powerful `ls` alternative
 # Install with homebrew: brew install eza
@@ -149,6 +162,15 @@ if [ -d "$DEVELOPMENT/git-clean" ]; then
 fi
 
 # ======== Useful Commands ========
+
+# == Dotfile Doctor ==
+# Tells you what applications aren't installed/on the PATH.
+dotfile_doctor() {
+	if (( ${#NOT_INSTALLED[@]} > 0 )); then
+		echo "Applications not installed/configured:" >&2
+		printf '  - %s\n' "${NOT_INSTALLED[@]}" >&2
+	fi
+}
 
 # == https://mosh.org/ ==
 # Use mosh to start in a tmux session. If you have SSH aliases set up you can do:
